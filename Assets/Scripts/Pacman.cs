@@ -9,6 +9,8 @@ public class Pacman : MonoBehaviour
 //The numbers
     [SerializeField] float moveSpeed = 5f;
 
+    public PelletManager pm;
+
     void Start()
     {
         
@@ -16,8 +18,8 @@ public class Pacman : MonoBehaviour
 
     void Update()
     {
-        // This code rotates pacman to face the way he's moving
-        //Script based off of 
+        //This code rotates pacman to face the way he's moving
+        //www.youtube.com/watch?v=GxlxZ5q__Tc&t=6850s
         Moving();
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
@@ -47,5 +49,16 @@ public class Pacman : MonoBehaviour
         var newYPos = transform.position.y + yInput;
 
         transform.position = new Vector2(newXPos, newYPos);
+    }
+
+    //This code destroys any pellets that are touched and adds to a score counter
+    //www.youtube.com/watch?v=5GWRPwuWtsQ
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Pellet"))
+        {
+            Destroy(other.gameObject);
+            pm.pelletScore++;
+        }
     }
 }

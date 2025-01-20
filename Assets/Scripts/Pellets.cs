@@ -8,6 +8,7 @@ public class Pellets : MonoBehaviour
     {
         
     }
+    //This code destroys the pellet on collision with the player
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
