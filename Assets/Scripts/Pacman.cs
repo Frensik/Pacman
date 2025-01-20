@@ -40,7 +40,7 @@ public class Pacman : MonoBehaviour
         {
             transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
-        ChangeAnimToRun();
+        ChangeAnimToMove();
     }
 
     private void Moving()
@@ -55,11 +55,11 @@ public class Pacman : MonoBehaviour
 
         transform.position = new Vector2(newXPos, newYPos);
 
-        ChangeAnimToRun();
+        ChangeAnimToMove();
     }
-    private void ChangeAnimToRun()
+    private void ChangeAnimToMove()
     {
-        bool isPlayerMoving = Mathf.Abs(rb2d.velocity.x) != 0;
+        bool isPlayerMoving = Mathf.Abs(rb2d.velocity.x) > 0;
         if(isPlayerMoving)
         {
             anim.SetBool("IsMoving", true);

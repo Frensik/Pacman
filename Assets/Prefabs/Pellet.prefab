@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6738021744322617998}
   - component: {fileID: 6738021744322617999}
-  - component: {fileID: 6738021744322617992}
   - component: {fileID: 7115941847047142824}
   - component: {fileID: 6738021744322617997}
   m_Layer: 0
@@ -85,18 +84,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6738021744322617992
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6738021744322617993}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62f734ed2fb67a0489e3121d11e91261, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7115941847047142824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,6 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pelletScore: 0
+  score: {fileID: 0}
 --- !u!61 &6738021744322617997
 BoxCollider2D:
   m_ObjectHideFlags: 0
