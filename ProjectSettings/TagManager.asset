@@ -47,6 +47,9 @@ TagManager:
   - name: Foreground
     uniqueID: 770370873
     locked: 0
+  - name: Pellets
+    uniqueID: 4119258571
+    locked: 0
   - name: Player
     uniqueID: 5155819
     locked: 0
