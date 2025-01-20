@@ -4,16 +4,7 @@ using UnityEngine;
 
 public class PelletManager : MonoBehaviour
 {
+    //This makes the variable which can be referenced in the pacman script
     public int pelletScore;
 
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -10,6 +10,7 @@ public class Pacman : MonoBehaviour
     [SerializeField] float moveSpeed = 5f;
 
     public PelletManager pm;
+    public bool isMoving;
 
     void Start()
     {
@@ -53,7 +54,7 @@ public class Pacman : MonoBehaviour
 
     //This code destroys any pellets that are touched and adds to a score counter
     //www.youtube.com/watch?v=5GWRPwuWtsQ
-    private void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Pellet"))
         {
