@@ -83,16 +83,17 @@ public class Pacman : MonoBehaviour
     }
     private void ChangeAnimToMove()
     {
-        // Moving chack taken from discussions.unity.com/t/boolean-if-moving-turn-true/676224/5
-        bool isPlayerMoving = rb2d.velocity.magnitude > Mathf.Epsilon;
+        //If the velocity is not equal to 0 then the player is moving and the bool is set to true
+        //This triggers the animation to change (in theory)
+        bool isPlayerMoving = Mathf.Abs(rb2d.velocity.x) > 0;
         if (isPlayerMoving)
         {
-            anim.SetBool("IsMoving", true);
+            anim.SetBool("IsMoving", isPlayerMoving);
         }
-        else if(!isPlayerMoving)
+        /*else if(!isPlayerMoving)
         {
             anim.SetBool("IsMoving", false);
-        }
+        }*/
     }
 
     
