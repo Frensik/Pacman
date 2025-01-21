@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
         
     }
 
+    //Can be called in the pacman script to make the game over UI visible
+    //youtu.be/pKFtyaAPzYo?si=lzFF8S5IFcEM5JrZ
     public void gameOver()
     {
         gameOverUI.SetActive(true);
