@@ -27,6 +27,7 @@ public class PelletManager : MonoBehaviour
             //Lowers the volume so it doesn't shatter my eardrums
             source.volume = 0.05f;
             //youtu.be/ln4ilSVR1Ug?si=STpjQ5ooBXGs3Otv (audio tutorial)
+            //Plays the audio once
             source.PlayOneShot(clip);
         }
     }
