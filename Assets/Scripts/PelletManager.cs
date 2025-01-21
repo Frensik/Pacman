@@ -32,13 +32,7 @@ public class PelletManager : MonoBehaviour
         }
     }
 
-    //Public so it can be called in the pacman script
-    //youtu.be/K4uOjb5p3Io?si=8VusPPsW0uGTqQbA 
-    public void Setup()
-    {
-        gameObject.SetActive(true);
-        gameEndScore.text = "Score: " + pelletScore.ToString();
-    }
+
 
 
 }
