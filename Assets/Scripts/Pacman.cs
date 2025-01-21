@@ -13,7 +13,7 @@ public class Pacman : MonoBehaviour
     [SerializeField] Rigidbody2D rb2d;
     [SerializeField] Animator anim;
     [SerializeField] CircleCollider2D col;
-    public GameManager gameManager;
+    //public GameManager gameManager;
 
     //These allow for audio clips to be played by allowing for the audio clips and audio sources to be assigned in the unity editer
     public AudioSource source;
@@ -89,10 +89,10 @@ public class Pacman : MonoBehaviour
         {
             anim.SetBool("IsMoving", true);
         }
-        /*if(!isPlayerMoving)
+        else if(!isPlayerMoving)
         {
             anim.SetBool("IsMoving", false);
-        }*/
+        }
     }
 
     
@@ -117,7 +117,7 @@ public class Pacman : MonoBehaviour
             source.PlayOneShot(clip);
             //Makes the object invisible so that it's not awkwardly sitting and not moving once control is taken away
             //discussions.unity.com/t/make-an-object-invisible-from-script/809531/3
-            gameManager.gameOver();
+            //gameManager.gameOver();
             gameObject.SetActive(false);
             //Activates game over screen
             //gameOverScreen.Setup();
