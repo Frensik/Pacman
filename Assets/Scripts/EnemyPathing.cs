@@ -25,12 +25,14 @@ public class EnemyPathing : MonoBehaviour
     //This makes it so the enemy loops on the created path from the waypoints
     private void moveEnemyOnPath()
     {
+        //Checks if the current waypoint is the same as the one at the end of the list to check if it's at the end of the path
         if(wayPointIndex <= waypoints.Count-1)
         {
             //Moves towards the next waypoint and when it hits it it adds one to the counter which directs it to the next waypoint
             var targetWayPointPosition = waypoints[wayPointIndex].transform.position;
             transform.position = Vector2.MoveTowards(transform.position, targetWayPointPosition, enemyMoveSpeed * Time.deltaTime);
 
+            //If a waypoint has been reached it adds one to the wayPointIndex so that it locks on to the next one and can move towards that
             if(transform.position == targetWayPointPosition)
             {
                 wayPointIndex++;

@@ -6,30 +6,28 @@ using UnityEngine;
 public class Pacman : MonoBehaviour
 {
 
-    //The numbers
+    //Allows the movespeed to be edited in the unity editor as well
     [SerializeField] float moveSpeed = 5f;
 
-
+    //Cached references
     [SerializeField] Rigidbody2D rb2d;
     [SerializeField] Animator anim;
     [SerializeField] CircleCollider2D col;
+    public PelletManager gameOverScreen;
 
-    //These allow for audio clips to be played
+    //These allow for audio clips to be played by allowing for the audio clips and audio sources to be assigned in the unity editer
     public AudioSource source;
     public AudioClip clip;
+
 
     //states
     bool isAlive = true;
 
     public PelletManager pm;
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
+        //Calls functions so that they happen every frame
         Rotate();
         ChangeAnimToMove();
         PlayerDeathSequence();
@@ -41,6 +39,8 @@ public class Pacman : MonoBehaviour
         //This code rotates pacman to face the way he's moving
         //www.youtube.com/watch?v=GxlxZ5q__Tc&t=6850s
         Moving();
+        //Checks if up is being pressed every frame since this is called in update
+        //Changes the rotation value to face that direction using transform.rotation
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
             transform.rotation = Quaternion.Euler(0f, 0f, 90f);
@@ -57,7 +57,6 @@ public class Pacman : MonoBehaviour
         {
             transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
-        ChangeAnimToMove();
     }
 
     private void Moving()
@@ -68,13 +67,16 @@ public class Pacman : MonoBehaviour
             return;
         }
         //This takes the input from the new input system and moves pacman along the x and y axis depending on what buttons are pressed
-        //Movement script taken from schmup lecture 1
+        //Time.deltatime makes it dependant on time passing rather than the fps of the system that is running the program
+        //Makes it consistent between devices and individual times playing the game
         var xInput = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
+        //Creates a goal X position by adding to newXPos
         var newXPos = transform.position.x + xInput;
 
         var yInput = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
         var newYPos = transform.position.y + yInput;
 
+        //Transforms the position of pacman to the new coordinates using the constantly updating newXPos and newYPos
         transform.position = new Vector2(newXPos, newYPos);
 
         ChangeAnimToMove();
@@ -109,10 +111,15 @@ public class Pacman : MonoBehaviour
     {
         if(col.IsTouchingLayers(LayerMask.GetMask("Enemy")))
         {
+            //Sets isAlive to false so that it affects other areas of the script where this is called
             isAlive = false;
             source.volume = 0.1f;
             source.PlayOneShot(clip);
+            //Makes the object invisible so that it's not awkwardly sitting and not moving once control is taken away
+            //discussions.unity.com/t/make-an-object-invisible-from-script/809531/3
             gameObject.SetActive(false);
+            //Activates game over screen
+            //gameOverScreen.Setup();
         }
     }
 
