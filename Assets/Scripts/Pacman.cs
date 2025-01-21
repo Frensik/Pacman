@@ -6,11 +6,20 @@ using UnityEngine;
 public class Pacman : MonoBehaviour
 {
 
-//The numbers
+    //The numbers
     [SerializeField] float moveSpeed = 5f;
+
 
     [SerializeField] Rigidbody2D rb2d;
     [SerializeField] Animator anim;
+    [SerializeField] CircleCollider2D col;
+
+    //These allow for audio clips to be played
+    public AudioSource source;
+    public AudioClip clip;
+
+    //states
+    bool isAlive = true;
 
     public PelletManager pm;
 
@@ -20,6 +29,14 @@ public class Pacman : MonoBehaviour
     }
 
     void Update()
+    {
+        Rotate();
+        ChangeAnimToMove();
+        PlayerDeathSequence();
+    }
+
+
+    private void Rotate()
     {
         //This code rotates pacman to face the way he's moving
         //www.youtube.com/watch?v=GxlxZ5q__Tc&t=6850s
@@ -45,6 +62,11 @@ public class Pacman : MonoBehaviour
 
     private void Moving()
     {
+        //If statement prevents any input from the player when they're dead by checking if isAlive is false
+        if(!isAlive)
+        {
+            return;
+        }
         //This takes the input from the new input system and moves pacman along the x and y axis depending on what buttons are pressed
         //Movement script taken from schmup lecture 1
         var xInput = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
@@ -59,8 +81,9 @@ public class Pacman : MonoBehaviour
     }
     private void ChangeAnimToMove()
     {
-        bool isPlayerMoving = Mathf.Abs(rb2d.velocity.x) > 0;
-        if(isPlayerMoving)
+        // Moving chack taken from discussions.unity.com/t/boolean-if-moving-turn-true/676224/5
+        bool isPlayerMoving = rb2d.velocity.magnitude > Mathf.Epsilon;
+        if (isPlayerMoving)
         {
             anim.SetBool("IsMoving", true);
         }
@@ -77,8 +100,19 @@ public class Pacman : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Pellet"))
         {
-            Destroy(other.gameObject);
             pm.pelletScore++;
+            Destroy(other.gameObject);
+        }
+    }
+    //Toggles isAlive to false when touching an enemy
+    private void PlayerDeathSequence()
+    {
+        if(col.IsTouchingLayers(LayerMask.GetMask("Enemy")))
+        {
+            isAlive = false;
+            source.volume = 0.1f;
+            source.PlayOneShot(clip);
+            gameObject.SetActive(false);
         }
     }
 
